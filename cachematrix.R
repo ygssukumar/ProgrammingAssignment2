@@ -9,16 +9,20 @@
  # provided
 
 makeCacheMatrix <- function(inpMatrix = matrix()) {
+  #initial value 
   tempMatrix <- NULL
+  #set initial value of matrix to calculate inverse
   set <- function(tempym) {
     inpMatrix <<- tempym 
     tempMatrix <<- NYLL
   }
-  
+  #get function to retrieve matrix from cache
   get <- function() inpMatrix
   ##using solve assuming input is square matrix else the function "inverse" can be used
-  setMatInverse <- function(solve) tempMatrix <<- solve 
+  setMatInverse <- function(solve) tempMatrix <<- solve
+  ##getting the matrix inverse
   getMatInverse <- function() tempMatrix
+  ##list can also be returned if required
   list(set=set, get=get,
        setMatInverse=setMatInverse,
        getMatInverse=getMatInverse)
@@ -32,8 +36,9 @@ makeCacheMatrix <- function(inpMatrix = matrix()) {
   
 
 cacheSolve <- function(x=matrix(), ...) {
+    ##get Matrix inverse
     maT <- x$getMatInverse()
-    if(!is.null(m)) {
+    if(!is.null(maT)) {
       message("Input provided is null")
       return(maT)
     }
